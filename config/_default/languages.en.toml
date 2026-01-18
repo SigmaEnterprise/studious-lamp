@@ -1,26 +1,27 @@
 languageCode = "en"
 languageName = "English"
 weight = 1
-title = "Gray Blowfish"
-contentDir = 'content/en'
-
+title = "Nautilus"
+contentDir = "content/en"
 
 [params]
-  displayName = "EN"
-  isoCode = "en"
-  rtl = false
-  # logo = "img/logo.png"
-  description = "My awesome website"
-  # copyright = "Copy, _right?_ :thinking_face:"
-  dateFormat = "2 January 2006"
+displayName = "EN"
+isoCode = "en"
+rtl = false
+description = "A digital sovereignty manifesto and technical log."
+dateFormat = "17 January 2026"
+copyright = "2026-2030 Libretech Systems"
 
-[params.author]
+  [params.author]
   name = "Gray Blowfish"
   image = "img/avatar.png"
   headline = "This is my very simple profile website with my links"
   bio = "A little bit about you"
-   links = [
-     { link = "https://nunocoracao.github.io/blowfish/" },
-     { github = "https://github.com/nunocoracao/blowfish" },
-     { x-twitter = "https://twitter.com/burufugu" }
-   ]
+  links = [ ]
+
+["params.author"]
+name = "Libretech Systems"
+email = "libretechsystems@placeq.com"
+image = "disp2.jpg"
+headline = "Simply Scalable."
+bio = "Security Engineer | Full-Stack Dev | Sovereign Infrastructure. Building at the intersection of #Bitcoin, #Nostr, and Cryptography. Dedicated to high-performance, Zero-Trust architecture."

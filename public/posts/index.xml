@@ -1,1 +1,55 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Gray Blowfish</title><link>//localhost:1313/posts/</link><description>Recent content in Posts on Gray Blowfish</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© 2024 Gray Blowfish</copyright><lastBuildDate>Sun, 04 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Super cool article that I wrote</title><link>//localhost:1313/posts/post-lite-one/</link><pubDate>Sun, 04 Sep 2022 00:00:00 +0000</pubDate><guid>//localhost:1313/posts/post-lite-one/</guid><description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in eleifend justo, vestibulum congue lacus. Quisque est libero, lacinia sed placerat ac, interdum id urna.</description></item><item><title>Super cool article that I wrote</title><link>//localhost:1313/posts/post-lite-three/</link><pubDate>Sun, 04 Sep 2022 00:00:00 +0000</pubDate><guid>//localhost:1313/posts/post-lite-three/</guid><description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in eleifend justo, vestibulum congue lacus. Quisque est libero, lacinia sed placerat ac, interdum id urna.</description></item><item><title>Super cool article that I wrote</title><link>//localhost:1313/posts/post-lite-two/</link><pubDate>Sun, 04 Sep 2022 00:00:00 +0000</pubDate><guid>//localhost:1313/posts/post-lite-two/</guid><description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in eleifend justo, vestibulum congue lacus. Quisque est libero, lacinia sed placerat ac, interdum id urna.</description></item><item><title>Super cool article that I wrote</title><link>//localhost:1313/posts/post-lite-four/</link><pubDate>Sat, 04 Sep 2021 00:00:00 +0000</pubDate><guid>//localhost:1313/posts/post-lite-four/</guid><description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in eleifend justo, vestibulum congue lacus. Quisque est libero, lacinia sed placerat ac, interdum id urna.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Nautilus</title>
+    <link>//localhost:1313/posts/</link>
+    <description>Recent content in Posts on Nautilus</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>libretechsystems@placeq.com (Libretech Systems)</managingEditor>
+    <webMaster>libretechsystems@placeq.com (Libretech Systems)</webMaster>
+    <copyright>2026-2030 Libretech Systems</copyright>
+    <lastBuildDate>Sat, 17 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Analysis of Entropy Loss and Computational Security: PBKDF2 vs. Argon2id in WASM Environments</title>
+      <link>//localhost:1313/posts/post-lite-one/</link>
+      <pubDate>Sat, 17 Jan 2026 00:00:00 +0000</pubDate>
+      <author>libretechsystems@placeq.com (Libretech Systems)</author>
+      <guid>//localhost:1313/posts/post-lite-one/</guid>
+      <description>In the realm of modern cryptography, Password-Based Key Derivation Functions (KDFs) are essential for transforming human-readable passwords into high-entropy cryptographic keys. Two of the most prominent functions in use today are &lt;strong&gt;PBKDF2 (Password-Based Key Derivation Function 2)&lt;/strong&gt; and &lt;strong&gt;Argon2id&lt;/strong&gt;.</description>
+      
+    </item>
+    
+    <item>
+      <title>Guide to the Web Crypto API: Building a Zero-Knowledge Vault Without External Libs</title>
+      <link>//localhost:1313/posts/post-lite-two/</link>
+      <pubDate>Sat, 17 Jan 2026 00:00:00 +0000</pubDate>
+      <author>libretechsystems@placeq.com (Libretech Systems)</author>
+      <guid>//localhost:1313/posts/post-lite-two/</guid>
+      <description>In an era where data breaches are not a matter of if but when, the responsibility of protecting user data has shifted from the server to the client.</description>
+      
+    </item>
+    
+    <item>
+      <title>Modern industry move toward the Sanitizer API as the definitive replacement for unsafe HTML manipulation.</title>
+      <link>//localhost:1313/posts/post-lite-three/</link>
+      <pubDate>Sat, 17 Jan 2026 00:00:00 +0000</pubDate>
+      <author>libretechsystems@placeq.com (Libretech Systems)</author>
+      <guid>//localhost:1313/posts/post-lite-three/</guid>
+      <description>In the architecture of a modern web application, the Document Object Model (DOM) is the bridge between static code and dynamic user interaction.</description>
+      
+    </item>
+    
+    <item>
+      <title>The Fortress of the DOM: Implementing Trusted Types in Vanilla JavaScript</title>
+      <link>//localhost:1313/posts/post-lite-four/</link>
+      <pubDate>Sat, 17 Jan 2026 00:00:00 +0000</pubDate>
+      <author>libretechsystems@placeq.com (Libretech Systems)</author>
+      <guid>//localhost:1313/posts/post-lite-four/</guid>
+      <description>Cross-Site Scripting (XSS) has remained a fixture of the OWASP Top 10 for decades, but as the web has shifted from server-side rendering to complex, client-side logic, the nature of the threat has evolved.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

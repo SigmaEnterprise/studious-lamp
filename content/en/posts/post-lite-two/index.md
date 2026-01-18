@@ -1,25 +1,150 @@
 ---
-title: "Super cool article that I wrote"
-summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in eleifend justo, vestibulum congue lacus. Quisque est libero, lacinia sed placerat ac, interdum id urna."
+title: "Guide to the Web Crypto API: Building a Zero-Knowledge Vault Without External Libs"
+summary: "In an era where data breaches are not a matter of if but when, the responsibility of protecting user data has shifted from the server to the client."
 categories: ["Post","Blog",]
-tags: ["post","lorem","ipsum"]
+tags: ["WebCryptoAPI","ZeroKnowledge","Vault"]
 #externalUrl: ""
 #showSummary: true
-date: 2022-09-04
+date: 2026-01-17
 draft: false
 ---
 
-## Lorem ipsum dolor sit amet
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in eleifend justo, vestibulum congue lacus. Quisque est libero, lacinia sed placerat ac, interdum id urna. Nulla venenatis volutpat libero, in laoreet leo fringilla eget. Etiam consequat sed nisi sit amet interdum. Pellentesque ullamcorper at turpis in ultrices. Pellentesque et elit mauris. Aenean eu augue sit amet nunc interdum ultricies. Aenean eleifend consectetur sapien vitae consectetur. Donec risus mauris, finibus at condimentum at, lacinia sit amet neque. Nulla facilisi. Suspendisse sollicitudin dolor quis eros tempor, a tempus ex varius.
+#### 1. Basic Premise
 
-## Nunc non leo non magna
-Nunc non leo non magna ornare condimentum. Phasellus consequat nunc ut tellus porttitor bibendum. In pharetra ullamcorper metus quis mollis. Mauris bibendum, est in commodo hendrerit, dolor purus hendrerit dolor, at pharetra sapien erat sit amet ante. Etiam aliquet euismod libero, vel tincidunt felis mollis at. Sed scelerisque, tortor in convallis auctor, elit quam consectetur lacus, quis posuere risus libero non sem. Mauris sagittis nisi id aliquam lacinia. Vivamus finibus velit sed condimentum aliquet. Nullam in ante a erat lacinia semper. Curabitur pretium justo at leo maximus, quis dignissim nulla posuere. Donec eget consectetur neque, et mattis dui. Vivamus at mi enim. Nullam et nisi est. Nullam eget eros blandit, convallis odio eget, ornare enim.
+In an era where data breaches are not a matter of "if" but "when," the responsibility of protecting user data has shifted from the server to the client. Traditional security models rely on the server being a trusted entity that handles sensitive information in plaintext or decrypts it for processing. However, the "Zero-Knowledge" (ZK) architecture challenges this paradigm by ensuring that the service provider has exactly zero knowledge of the user's sensitive data. In a ZK vault, data is encrypted on the user’s device before it ever touches a network cable, and the decryption keys never leave the client-side environment.
 
-## Quisque ultricies
-Quisque ultricies tincidunt sem nec tincidunt. Aenean nibh diam, dapibus varius ornare nec, suscipit ut arcu. Integer ut elit sollicitudin, fermentum ipsum nec, tempus eros. Donec hendrerit facilisis maximus. Pellentesque eu mi ipsum. Vivamus diam tellus, varius sed dolor at, finibus tempus lorem. Morbi sed mauris quis enim vehicula hendrerit. Sed et sollicitudin est. Maecenas scelerisque ligula ac purus gravida, et feugiat nibh blandit. Integer id quam ac arcu convallis interdum eget sed libero. Aliquam varius est quis efficitur efficitur. Cras id turpis magna. Aenean cursus, libero auctor ullamcorper vestibulum, nisl risus consectetur nisi, ut molestie enim libero sed ipsum.
+Historically, implementing robust cryptography in the browser required heavy external libraries like CryptoJS or Forge. While these libraries are powerful, they increase the "attack surface" of an application by introducing third-party code that must be audited and updated. Modern browsers now offer a native solution: the **Web Crypto API**. This low-level interface provides high-performance, cryptographically sound primitives directly in the browser, allowing developers to build "Host-Proof" applications with zero external dependencies. This guide explores how to leverage this API to build a secure, private vault from scratch.
 
-## Etiam sollicitudin
-Etiam sollicitudin, ante ac fermentum varius, lorem ante congue mi, auctor dictum magna sem sed nibh. In et est id neque gravida aliquet quis a felis. Mauris tempor lectus ut gravida ornare. Curabitur at elementum tortor, in feugiat elit. Aenean auctor diam ut egestas rhoncus. Quisque tristique venenatis risus vitae suscipit. Nunc feugiat purus sed dolor gravida, non ullamcorper metus suscipit. Sed et tortor odio. Pellentesque at scelerisque nulla. In ut aliquam metus. Vivamus congue augue at pellentesque rhoncus. Donec a lectus tincidunt, aliquet libero sit amet, commodo arcu. Vivamus hendrerit quis augue eu lacinia. Sed sodales velit condimentum eros varius vulputate.
+---
 
-## Proin tempor lorem
-Proin tempor lorem quam, ac maximus lectus sodales et. Sed laoreet orci vel metus luctus lobortis. Nam ex velit, vehicula id tristique sed, blandit eu nisi. Quisque semper libero nec massa malesuada congue. In faucibus lorem at diam fringilla, vel viverra magna lobortis. Ut commodo est urna, ut aliquet enim sagittis ut. Nulla posuere arcu sed lobortis accumsan. Phasellus fringilla dolor id est lobortis feugiat. Quisque enim elit, faucibus a mauris non, mattis aliquet orci. Nunc sagittis viverra erat, id condimentum lacus suscipit quis.
+#### 2. Overview of the Web Crypto API
+
+The Web Crypto API is an interface allowing scripts to use cryptographic primitives to build secure systems. It is accessible via `window.crypto`, which provides two main properties:
+
+* `crypto.getRandomValues()`: For generating cryptographically strong pseudo-random numbers.
+* `crypto.subtle`: The core of the API, providing asynchronous methods for hashing, key generation, encryption, and decryption.
+
+The "Subtle" in `SubtleCrypto` serves as a warning: cryptographic operations are easy to get wrong. Unlike high-level libraries that might make safety decisions for you, the Web Crypto API requires you to specify every parameter—from the algorithm and key length to the initialization vector (IV).
+
+One of the primary advantages of using native Web Crypto is performance. Because it is implemented by the browser engine (often in C++), it can perform heavy computations, like PBKDF2 iterations, much faster than a JavaScript-based library. Furthermore, it operates in a "secure context" (HTTPS), ensuring that sensitive operations are protected from man-in-the-middle attacks.
+
+---
+
+#### 3. Key Concepts of Zero-Knowledge Vaults
+
+Before diving into code, we must define what "Zero-Knowledge" means in the context of a web vault. In this architecture, the server acts as a "blind" storage locker. It stores encrypted blobs of data (ciphertext) but lacks the keys to open them.
+
+The security of such a system hinges on three pillars:
+
+1. **Deterministic Key Derivation:** Since the server doesn't store the key, the user must be able to recreate the exact same key across different devices using their master password. We use **PBKDF2** (Password-Based Key Derivation Function 2) for this.
+2. **Authenticated Encryption:** We use **AES-GCM** (Advanced Encryption Standard - Galois/Counter Mode). Unlike older modes like AES-CBC, GCM provides both confidentiality and integrity, ensuring that if an attacker tampers with the encrypted data, the decryption will fail.
+3. **Local Storage of Non-Sensitive Metadata:** To decrypt data, the client needs the "salt" used for the password and the "IV" used for the encryption. These are not secret and are stored on the server alongside the ciphertext.
+
+---
+
+#### 4. Step-by-Step Implementation of a Zero-Knowledge Vault
+
+Building the vault involves three major phases: transforming the user's password into a key, encrypting the data, and securely handling the output.
+
+##### Phase 1: Key Derivation (PBKDF2)
+
+A raw password is a poor encryption key because it lacks entropy. PBKDF2 "stretches" the password by running it through thousands of rounds of hashing.
+
+```javascript
+// Step 1: Convert a password string into a CryptoKey material
+async function getPasswordKey(password) {
+  const enc = new TextEncoder();
+  return crypto.subtle.importKey(
+    "raw",
+    enc.encode(password),
+    "PBKDF2",
+    false,
+    ["deriveKey"]
+  );
+}
+
+// Step 2: Derive a secret AES-GCM key from the password key and a salt
+async function deriveKey(passwordKey, salt) {
+  return crypto.subtle.deriveKey(
+    {
+      name: "PBKDF2",
+      salt: salt,
+      iterations: 600000, // Industry standard for 2026
+      hash: "SHA-256",
+    },
+    passwordKey,
+    { name: "AES-GCM", length: 256 },
+    false, // Key is non-extractable for security
+    ["encrypt", "decrypt"]
+  );
+}
+
+```
+
+##### Phase 2: Encryption (AES-GCM)
+
+Once we have the derived key, we can encrypt the data. Every encryption operation must use a unique **Initialization Vector (IV)** to ensure that the same plaintext doesn't result in the same ciphertext.
+
+```javascript
+async function encryptData(secretKey, plaintext) {
+  const enc = new TextEncoder();
+  const iv = crypto.getRandomValues(new Uint8Array(12)); // GCM standard IV length
+  const encodedData = enc.encode(plaintext);
+
+  const ciphertext = await crypto.subtle.encrypt(
+    {
+      name: "AES-GCM",
+      iv: iv,
+    },
+    secretKey,
+    encodedData
+  );
+
+  return { ciphertext, iv };
+}
+
+```
+
+##### Phase 3: Decryption
+
+To decrypt, we retrieve the `ciphertext`, `iv`, and `salt` from the server. We recreate the key using the salt and then use the IV to unlock the data.
+
+```javascript
+async function decryptData(secretKey, ciphertext, iv) {
+  try {
+    const decrypted = await crypto.subtle.decrypt(
+      {
+        name: "AES-GCM",
+        iv: iv,
+      },
+      secretKey,
+      ciphertext
+    );
+
+    return new TextDecoder().decode(decrypted);
+  } catch (e) {
+    throw new Error("Decryption failed. Wrong password or corrupted data.");
+  }
+}
+
+```
+
+---
+
+#### 5. Security Considerations
+
+While the Web Crypto API is powerful, it is not a "silver bullet." Developers must be mindful of several critical factors:
+
+* **Memory Management:** JavaScript is a garbage-collected language. Even if you "delete" a password variable, it may remain in memory until the browser clears it. For ultra-secure vaults, sensitive data should be stored in `TypedArrays` and cleared manually by overwriting them with zeros (`Uint8Array.fill(0)`).
+* **The Iteration Count:** PBKDF2 iterations are meant to slow down attackers. In 2026, 600,000 iterations is the baseline. Lower counts make the vault susceptible to GPU-based brute-force attacks.
+* **Non-Extractable Keys:** In the `deriveKey` method, the `extractable` parameter should be set to `false`. This prevents malicious scripts or XSS attacks from calling `exportKey()` and stealing the derived key.
+* **Salt Management:** Never reuse a salt. Each user should have a unique, random salt generated by `crypto.getRandomValues()`. Reusing salts allows attackers to use "Rainbow Tables" to crack passwords more efficiently.
+
+---
+
+#### 6. Consider
+
+Building a zero-knowledge vault using the native Web Crypto API allows developers to create highly secure, private applications without the bloat and risk associated with external libraries. By performing all cryptographic operations on the client and treating the server as a blind storage provider, we significantly reduce the impact of a potential server-side data breach.
+
+The Web Crypto API provides the necessary primitives—PBKDF2 for stretching passwords and AES-GCM for authenticated encryption—to build "Sovereign-grade" infrastructure directly in the browser. As privacy becomes a core feature rather than an afterthought, mastering these native tools is essential for every modern developer.
+

@@ -1,25 +1,170 @@
 ---
-title: "Super cool article that I wrote"
-summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in eleifend justo, vestibulum congue lacus. Quisque est libero, lacinia sed placerat ac, interdum id urna."
+title: "The Fortress of the DOM: Implementing Trusted Types in Vanilla JavaScript"
+summary: "Cross-Site Scripting (XSS) has remained a fixture of the OWASP Top 10 for decades, but as the web has shifted from server-side rendering to complex, client-side logic, the nature of the threat has evolved."
 categories: ["Post","Blog",]
-tags: ["post","lorem","ipsum"]
+tags: ["DOM-based-XSS","Trusted-Types","CSP"]
 #externalUrl: ""
 #showSummary: true
-date: 2021-09-04
+date: 2026-01-17
 draft: false
 ---
 
-## Lorem ipsum dolor sit amet
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in eleifend justo, vestibulum congue lacus. Quisque est libero, lacinia sed placerat ac, interdum id urna. Nulla venenatis volutpat libero, in laoreet leo fringilla eget. Etiam consequat sed nisi sit amet interdum. Pellentesque ullamcorper at turpis in ultrices. Pellentesque et elit mauris. Aenean eu augue sit amet nunc interdum ultricies. Aenean eleifend consectetur sapien vitae consectetur. Donec risus mauris, finibus at condimentum at, lacinia sit amet neque. Nulla facilisi. Suspendisse sollicitudin dolor quis eros tempor, a tempus ex varius.
+#### 1. The Persistent Shadow of DOM-XSS
 
-## Nunc non leo non magna
-Nunc non leo non magna ornare condimentum. Phasellus consequat nunc ut tellus porttitor bibendum. In pharetra ullamcorper metus quis mollis. Mauris bibendum, est in commodo hendrerit, dolor purus hendrerit dolor, at pharetra sapien erat sit amet ante. Etiam aliquet euismod libero, vel tincidunt felis mollis at. Sed scelerisque, tortor in convallis auctor, elit quam consectetur lacus, quis posuere risus libero non sem. Mauris sagittis nisi id aliquam lacinia. Vivamus finibus velit sed condimentum aliquet. Nullam in ante a erat lacinia semper. Curabitur pretium justo at leo maximus, quis dignissim nulla posuere. Donec eget consectetur neque, et mattis dui. Vivamus at mi enim. Nullam et nisi est. Nullam eget eros blandit, convallis odio eget, ornare enim.
+While "Reflected" and "Stored" XSS are well-understood, **DOM-based XSS** represents a more insidious challenge.
 
-## Quisque ultricies
-Quisque ultricies tincidunt sem nec tincidunt. Aenean nibh diam, dapibus varius ornare nec, suscipit ut arcu. Integer ut elit sollicitudin, fermentum ipsum nec, tempus eros. Donec hendrerit facilisis maximus. Pellentesque eu mi ipsum. Vivamus diam tellus, varius sed dolor at, finibus tempus lorem. Morbi sed mauris quis enim vehicula hendrerit. Sed et sollicitudin est. Maecenas scelerisque ligula ac purus gravida, et feugiat nibh blandit. Integer id quam ac arcu convallis interdum eget sed libero. Aliquam varius est quis efficitur efficitur. Cras id turpis magna. Aenean cursus, libero auctor ullamcorper vestibulum, nisl risus consectetur nisi, ut molestie enim libero sed ipsum.
+In a DOM-based XSS attack, the vulnerability exists entirely in the client-side code. The server may be perfectly secure, but if the JavaScript on the page takes untrusted data (a "source," like a URL parameter) and passes it to a dangerous "sink" (like `element.innerHTML`), the browser will execute malicious code. Because the payload often never reaches the server, traditional Web Application Firewalls (WAFs) and server-side sanitizers are blind to it.
 
-## Etiam sollicitudin
-Etiam sollicitudin, ante ac fermentum varius, lorem ante congue mi, auctor dictum magna sem sed nibh. In et est id neque gravida aliquet quis a felis. Mauris tempor lectus ut gravida ornare. Curabitur at elementum tortor, in feugiat elit. Aenean auctor diam ut egestas rhoncus. Quisque tristique venenatis risus vitae suscipit. Nunc feugiat purus sed dolor gravida, non ullamcorper metus suscipit. Sed et tortor odio. Pellentesque at scelerisque nulla. In ut aliquam metus. Vivamus congue augue at pellentesque rhoncus. Donec a lectus tincidunt, aliquet libero sit amet, commodo arcu. Vivamus hendrerit quis augue eu lacinia. Sed sodales velit condimentum eros varius vulputate.
+To solve this fundamentally, the security community has moved beyond reactive blacklisting and toward a structural solution: **Trusted Types**. Trusted Types is a browser-level security primitive that transitions the DOM from an "open-by-default" system to a "locked-down" environment where only verified, type-safe objects can reach dangerous sinks.
 
-## Proin tempor lorem
-Proin tempor lorem quam, ac maximus lectus sodales et. Sed laoreet orci vel metus luctus lobortis. Nam ex velit, vehicula id tristique sed, blandit eu nisi. Quisque semper libero nec massa malesuada congue. In faucibus lorem at diam fringilla, vel viverra magna lobortis. Ut commodo est urna, ut aliquet enim sagittis ut. Nulla posuere arcu sed lobortis accumsan. Phasellus fringilla dolor id est lobortis feugiat. Quisque enim elit, faucibus a mauris non, mattis aliquet orci. Nunc sagittis viverra erat, id condimentum lacus suscipit quis.
+---
+
+#### 2. Overview of Trusted Types and Their Purpose
+
+Trusted Types is a Content Security Policy (CSP) directive that effectively "deprecates" the use of raw strings in dangerous DOM sinks. In a standard environment, `innerHTML` accepts any string. With Trusted Types enabled, the browser will throw a type error if you try to pass a string to `innerHTML`. Instead, you must pass a specialized object: a **TrustedHTML**, **TrustedScript**, or **TrustedScriptURL**.
+
+By requiring these objects, Trusted Types forces developers to centralize their security logic. Instead of hoping every developer on a team remembers to sanitize every input, Trusted Types ensures that the *only* way to update the DOM is through a pre-defined, audited "Policy."
+
+---
+
+#### 3. Step-by-Step Guide to Setting up Trusted Types
+
+Implementing Trusted Types in a vanilla JavaScript environment involves three distinct phases: Enforcement, Policy Creation, and Implementation.
+
+##### Phase 1: Enforcement via CSP
+
+The first step is to tell the browser to stop accepting strings in dangerous sinks. This is done via the `Content-Security-Policy` HTTP header:
+
+```http
+Content-Security-Policy: require-trusted-types-for 'script'; trusted-types my-policy default;
+
+```
+
+* `require-trusted-types-for 'script'`: This activates enforcement for all sinks that can execute code.
+* `trusted-types my-policy default`: This defines a "whitelist" of policy names that are allowed to create Trusted Types.
+
+##### Phase 2: Detecting the Support
+
+Before creating a policy, you should check if the user's browser supports the API:
+
+```javascript
+if (window.trustedTypes && window.trustedTypes.createPolicy) {
+    // Trusted Types is supported
+}
+
+```
+
+##### Phase 3: Creating a Policy
+
+A policy is an object that contains a set of "rules" for transforming a string into a Trusted Type.
+
+```javascript
+const myPolicy = trustedTypes.createPolicy('my-policy', {
+  createHTML: (input) => {
+    // Use a library like DOMPurify or a custom logic to clean the string
+    return DOMPurify.sanitize(input);
+  },
+  createScript: (input) => {
+    // Logic for validating scripts if necessary
+    return input;
+  },
+  createScriptURL: (input) => {
+    // Ensure URLs only point to trusted domains
+    if (input.startsWith('https://trusted-cdn.com/')) {
+      return input;
+    }
+    throw new Error('Untrusted Script URL');
+  }
+});
+
+```
+
+---
+
+#### 4. Implementation in Vanilla JS
+
+Once the policy is created, you can no longer do this:
+`elem.innerHTML = "<img src=x onerror=alert(1)>";` // This will throw a TypeError!
+
+Instead, you must use your policy:
+
+```javascript
+const userContent = fetchUserBio(); // Potential XSS source
+const secureHTML = myPolicy.createHTML(userContent);
+elem.innerHTML = secureHTML; // This works!
+
+```
+
+##### The "Default" Policy
+
+For legacy applications where changing every instance of `innerHTML` is impossible, you can define a **default policy**. The browser will automatically invoke the default policy whenever a string is passed to a sink.
+
+```javascript
+trustedTypes.createPolicy('default', {
+  createHTML: (input) => DOMPurify.sanitize(input)
+});
+
+// This will now work without throwing an error because it 
+// passes through the default policy first:
+elem.innerHTML = "<img src=x onerror=alert(1)>"; 
+
+```
+
+---
+
+#### 5. Practical Examples: Vulnerability vs. Mitigation
+
+To truly appreciate Trusted Types, we must look at how it handles real-world attack vectors.
+
+##### Example A: The URL Parameter Sink
+
+Imagine a "Search Results" page that displays the search term:
+
+```javascript
+// VULNERABLE
+const query = new URLSearchParams(window.location.search).get('q');
+document.getElementById('display').innerHTML = `Results for: ${query}`;
+
+```
+
+An attacker could send a link: `?q=<img src=x onerror=stealCookies()>`. Without Trusted Types, the browser executes `stealCookies()`. With Trusted Types, the string is rejected because it hasn't been processed by a policy, stopping the attack at the browser's entry point.
+
+##### Example B: Dynamic Script Loading
+
+Many SPAs load modules dynamically:
+
+```javascript
+// VULNERABLE
+const plugin = new URLSearchParams(window.location.search).get('plugin');
+const script = document.createElement('script');
+script.src = `/plugins/${plugin}.js`; // Attacker could use '../../evil.com/malice'
+document.head.appendChild(script);
+
+```
+
+Trusted Types enforcement on `createScriptURL` ensures that the `src` attribute only accepts a `TrustedScriptURL` object. If the attacker tries to inject a third-party domain, the policy logic we wrote in Phase 3 would throw an error before the script tag is even added to the DOM.
+
+---
+
+#### 6. Transitioning Legacy Codebases
+
+The greatest hurdle to Trusted Types is the "broken" state of existing code. If you have a massive vanilla JS app, turning on enforcement will likely break your site immediately.
+
+**The Strategy:**
+
+1. **Reporting Mode:** Use the `Content-Security-Policy-Report-Only` header. This allows you to see all the places where your code would have broken without actually breaking it.
+2. **Audit the Logs:** Use the reports to identify which sinks are receiving raw strings.
+3. **Refactor or Default:** Refactor high-risk sinks to use explicit policies and use a `default` policy for lower-risk areas until they can be addressed.
+
+---
+
+#### 7. Zero-Trust for the DOM
+
+Trusted Types represents a paradigm shift in web security. It moves the burden of security from the developer's memory to the browser's architecture. In a vanilla JavaScript environment, it provides a "Source of Truth" for all DOM manipulations, ensuring that no untrusted data can ever transition into executable code.
+
+By enforcing `require-trusted-types-for`, creating audited policies, and utilizing the native API, engineers can effectively eliminate DOM-based XSS from their applications. As privacy and security become the defining features of the modern web, Trusted Types is no longer an optional "extra"—it is the foundation of sovereign, host-proof infrastructure.
+
+This Follow up talk conveys the same idea
+
+{{< youtubeLite id="po6GumtHRmU" label=" Trusted types & the end of DOM XSS - Krzysztof Kotowicz " >}}
+
