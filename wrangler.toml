@@ -1,14 +1,7 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "nautilus"
 compatibility_date = "2026-01-18"
-
-# Explicitly defining this as a Pages project
 pages_build_output_dir = "./public"
 
 [vars]
 HUGO_VERSION = "0.154.5"
-
-[build]
-# We use quotes for the URL and the $CF_PAGES_URL variable if you want it dynamic, 
-# but here is your specific workers.dev path:
-command = "hugo --minify --baseURL https://nautilus.ceronode.workers.dev/"
