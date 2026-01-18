@@ -3,265 +3,279 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>//localhost:1313/tags/innerhtml/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/innerhtml/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>//localhost:1313/posts/post-lite-one/</loc>
-    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link
-      rel="alternate"
-      hreflang="pt-PT"
-      href="//localhost:1313/pt-pt/posts/post-lite-one/"
-    />
-    <xhtml:link
-      rel="alternate"
-      hreflang="en"
-      href="//localhost:1313/posts/post-lite-one/"
-    />
-  </url>
-  <url>
-    <loc>//localhost:1313/tags/argon2id/</loc>
-    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>//localhost:1313/categories/blog/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/posts/post-lite-one/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="pt-PT"
-      href="//localhost:1313/pt-pt/categories/blog/"
+      href="https://sigmaenterprise.github.io/nautilus/pt-pt/posts/post-lite-one/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="//localhost:1313/categories/blog/"
+      href="https://sigmaenterprise.github.io/nautilus/posts/post-lite-one/"
     />
   </url>
   <url>
-    <loc>//localhost:1313/categories/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/argon2id/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://sigmaenterprise.github.io/nautilus/categories/blog/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="pt-PT"
-      href="//localhost:1313/pt-pt/categories/"
+      href="https://sigmaenterprise.github.io/nautilus/pt-pt/categories/blog/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="//localhost:1313/categories/"
+      href="https://sigmaenterprise.github.io/nautilus/categories/blog/"
     />
   </url>
   <url>
-    <loc>//localhost:1313/tags/cryptography/</loc>
-    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>//localhost:1313/tags/csp/</loc>
-    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>//localhost:1313/tags/dom-based-xss/</loc>
-    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>//localhost:1313/posts/post-lite-two/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/categories/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="pt-PT"
-      href="//localhost:1313/pt-pt/posts/post-lite-two/"
+      href="https://sigmaenterprise.github.io/nautilus/pt-pt/categories/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="//localhost:1313/posts/post-lite-two/"
+      href="https://sigmaenterprise.github.io/nautilus/categories/"
     />
   </url>
   <url>
-    <loc>//localhost:1313/tags/liabilities/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/cryptography/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>//localhost:1313/posts/post-lite-three/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/csp/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/dev-teams/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/dom-based-xss/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/groups/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://sigmaenterprise.github.io/nautilus/posts/post-lite-two/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="pt-PT"
-      href="//localhost:1313/pt-pt/posts/post-lite-three/"
+      href="https://sigmaenterprise.github.io/nautilus/pt-pt/posts/post-lite-two/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="//localhost:1313/posts/post-lite-three/"
+      href="https://sigmaenterprise.github.io/nautilus/posts/post-lite-two/"
     />
   </url>
   <url>
-    <loc>//localhost:1313/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/liabilities/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://sigmaenterprise.github.io/nautilus/posts/post-lite-three/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="pt-PT"
-      href="//localhost:1313/pt-pt/"
+      href="https://sigmaenterprise.github.io/nautilus/pt-pt/posts/post-lite-three/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="//localhost:1313/"
+      href="https://sigmaenterprise.github.io/nautilus/posts/post-lite-three/"
     />
   </url>
   <url>
-    <loc>//localhost:1313/tags/pbkdf2/</loc>
-    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>//localhost:1313/categories/post/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="pt-PT"
-      href="//localhost:1313/pt-pt/categories/post/"
+      href="https://sigmaenterprise.github.io/nautilus/pt-pt/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="//localhost:1313/categories/post/"
+      href="https://sigmaenterprise.github.io/nautilus/"
     />
   </url>
   <url>
-    <loc>//localhost:1313/posts/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/nip-29/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://sigmaenterprise.github.io/nautilus/posts/post-lite-five/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/pbkdf2/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://sigmaenterprise.github.io/nautilus/categories/post/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="pt-PT"
-      href="//localhost:1313/pt-pt/posts/"
+      href="https://sigmaenterprise.github.io/nautilus/pt-pt/categories/post/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="//localhost:1313/posts/"
+      href="https://sigmaenterprise.github.io/nautilus/categories/post/"
     />
   </url>
   <url>
-    <loc>//localhost:1313/tags/sanitizer/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/posts/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>//localhost:1313/tags/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/sanitizer/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="pt-PT"
-      href="//localhost:1313/pt-pt/tags/"
+      href="https://sigmaenterprise.github.io/nautilus/pt-pt/tags/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="//localhost:1313/tags/"
+      href="https://sigmaenterprise.github.io/nautilus/tags/"
     />
   </url>
   <url>
-    <loc>//localhost:1313/posts/post-lite-four/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/posts/post-lite-four/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="pt-PT"
-      href="//localhost:1313/pt-pt/posts/post-lite-four/"
+      href="https://sigmaenterprise.github.io/nautilus/pt-pt/posts/post-lite-four/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="//localhost:1313/posts/post-lite-four/"
+      href="https://sigmaenterprise.github.io/nautilus/posts/post-lite-four/"
     />
   </url>
   <url>
-    <loc>//localhost:1313/tags/trusted-types/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/trusted-types/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>//localhost:1313/tags/vault/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/vault/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>//localhost:1313/tags/webcryptoapi/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/webcryptoapi/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>//localhost:1313/tags/zeroknowledge/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/tags/zeroknowledge/</loc>
     <lastmod>2026-01-17T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>//localhost:1313/authors/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/authors/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="pt-PT"
-      href="//localhost:1313/pt-pt/authors/"
+      href="https://sigmaenterprise.github.io/nautilus/pt-pt/authors/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="//localhost:1313/authors/"
+      href="https://sigmaenterprise.github.io/nautilus/authors/"
     />
   </url>
   <url>
-    <loc>//localhost:1313/series/</loc>
+    <loc>https://sigmaenterprise.github.io/nautilus/series/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="pt-PT"
-      href="//localhost:1313/pt-pt/series/"
+      href="https://sigmaenterprise.github.io/nautilus/pt-pt/series/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="//localhost:1313/series/"
+      href="https://sigmaenterprise.github.io/nautilus/series/"
     />
   </url>
 </urlset>
