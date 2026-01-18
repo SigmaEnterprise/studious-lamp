@@ -1,13 +1,16 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "nautilus"
 compatibility_date = "2026-01-18"
+
+# 1. Assets configuration must be in its own section
+[assets]
 directory = "./public"
-not_found_handlin = "404-page"
+not_found_handling = "404-page"
+html_handling = "auto-trailing-slash"
 
 [vars]
 HUGO_VERSION = "0.154.5"
 
 [build]
-command = "./build.sh"
-
-
+# This command runs automatically before 'wrangler deploy'
+command = "chmod +x build.sh && ./build.sh"
